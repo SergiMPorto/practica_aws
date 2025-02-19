@@ -1,22 +1,36 @@
-# Terraform
+<h1>Terraform</h1>
 
-## Proceso de construcción de plantilla
+<h2>Proceso de construcción de plantilla</h2>
 
-Para desplegar la web estática, he realizado los siguientes pasos:
+Para desplegar la web estática he realizado los siguientes pasos:
 
-1. Primero, configuré el archivo *providers.tf* para especificar la localización y la versión de Terraform.
-2. Luego, añadí los recursos necesarios en *main.tf*. Según la documentación de Terraform, para desplegar una web estática en AWS S3 es necesario crear los siguientes recursos:
-   - **aws_s3_bucket_website_configuration**: Configura el bucket para servir como sitio web estático.
-   - **aws_s3_object**: Define los objetos dentro del bucket, como *index.html*.
-   - Todo esto se debe incluir dentro de un **aws_s3_bucket**.
-3. Configuré la salida del recurso en *output.tf*, donde lo más importante es el valor que se mostrará al ejecutar `terraform output`:
-   - `"aws_s3_bucket_website_configuration"`: Recurso en Terraform que configura un bucket de S3 para servir como un sitio web estático.
-   - `"sergi_website"`: Nombre de la instancia específica del recurso.
-   - `"website_endpoint"`: Obtiene la URL pública del sitio web estático en S3.
+- Primero, configurar el archivo *providers.tf* para especificar la localización y la versión de Terraform.
+- Después, he añadido los recursos que se necesitan en el *main.tf*. En este caso y según busqué en la página de Terraform, para desplegar una web estática es necesario crear un recurso **aws_s3_bucket_website_configuration y aws_s3_object** para coger el archivo *index.html* y todo ello dentro de un **aws_s3_bucket**.
+- Configuramos la salida del recurso en *output.tf*, en donde lo más importante es el valor que se mostrará al ejecutar el output.  
 
-## Funcionamiento
+  - **"aws_s3_bucket_website_configuration"**: Es el recurso en Terraform que configura un bucket de S3 para servir como un sitio web estático.  
+  - **"sergi_website"**: Se refiere a la instancia específica del recurso, que en este caso se llama *sergi_website*.  
+  - **"website_endpoint"**: Obtiene la URL pública del sitio web estático en S3.
 
-Para poder abrir la web en el navegador, es necesario hacerlo en **modo incógnito**. Esto se debe a que se requiere establecer una política de seguridad adecuada.
+<h2>Funcionamiento</h2>
 
-En este caso, con el JSON que genera AWS, podemos crear una política de permisos donde solo se permite visualizar los archivos dentro del bucket, sin permitir su eliminación o subida.
+Para poder abrir la web en el navegador tenemos que entrar en **modo incógnito**. Para poder acceder, es necesario establecer una política de seguridad.  
+
+En este caso, con el JSON que ya genera AWS, podemos crear una política de permisos donde solo permitimos que se puedan ver los archivos, pero no borrar ni subir sobre los recursos que hemos creado dentro del bucket.
+
+![Policy](https://github.com/SergiMPorto/practica_aws/blob/master/image/Captura%20de%20pantalla%202025-02-19%20175910.png)
+Política de permisos para poder a la web.
+
+
+![Resultado](https://github.com/SergiMPorto/practica_aws/blob/master/image/applyresultado.png)
+Dirección para visualizar la web
+
+
+
+
+
+
+
+
+
 
